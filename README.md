@@ -24,6 +24,97 @@ The feature selection techniques used are:
 3.Embedded Method
 
 # CODING AND OUTPUT:
-       # INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS HERE
+
+import pandas as pd
+from scipy import stats import numpy as np
+df=pd.read_csv(”/content/bmi.csv”) df.head()
+image
+df . dropna ( )
+image max_vals=np.max(np.abs(df[['Height','Weight']])) max_vals
+image
+from sklearn.preprocessing import StandardScaler sc=StandardScaler()
+
+df[['Height', 'Weight']]=sc.fit_transform(df[['Height','Weight']]) df.head(10)
+image
+from sklearn.preprocessing import MinMaxScaler
+
+scaler=MinMaxScaler()
+df[['Height', 'Weight']]=scaler.fit transform(df[['Height','Weight']]) df.head(10)
+image
+from sklearn.preprocessing import Normalizer scaler=Normalizer()
+df[['Height', 'Weight']]=scaler.fit_transform(df[['Height', 'Weight']])
+df
+image
+df1=pd.read_csv(“/content/bmi.csv")
+from sklearn.preprocessing import MaxAbsScaler scaler=MaxAbsScaler()
+df1[['Height','Weight']]=scaler.fit_transform(df1[['Height', 'Weight']]) df1
+image
+df2=pd.read csv("/content/bmi.csv")
+from sklearn.preprocessing import RobustScaler scaler=RobustScaler()
+df2[['Height','Weight']]=scaler.fit_transform(df2[['Height', 'Weight']]) df2.head()
+image
+import pandas as pd import numpy as np import seaborn as sns
+from sklearn.model_selection import train_test_split from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score,confusion_matrix
+data=pd.read_csv('/content/income(1) (1).csv',na_values=[“ ?“]) data
+image
+data.isnull().sum()
+
+
+image missing=data[data.isnull().any(axis=1)] missing
+image
+data2	data.dropna(axis=0) data2
+image
+sal=data['SalStat']
+data2['SalStat']=data2['SalStat'].map({' less than or equal to 50,000':0,' gre
+
+print(data2['SalStat'])
+
+image
+sal2=data2['SalStat'] dfs=pd.concat([sal,sal2],axis=1) dfs
+image data2 image
+new_data=pd.get_dummies(data2, drop_first=True)
+new_data
+image columns_list=list(new_data.columns) print(columns_list)
+image
+features=list(set(columns_list)-set(['SalStat'])) print(features)
+image
+y=new_data['SalStat'].values print(y)
+[0 0 1 ... 0 0 0]
+
+x = new_data[features].values print(x)
+image
+train_x,test_x,train_y,test_y	train_test_split(x,y,test_size=0.3, random_sta g KNN_classifier=KNeighborsClassifier(n_neighbors	5) KNN_classifier.fit(train_x,train_y)
+
+imape
+prediction = KNN_classifier.predict(test_x) confusionMmatrix = confusion_matrix(test_y, prediction) print(confusionMmatrix)
+image
+accuracy_score=accuracy_score(test_y, prediction) print(accuracy_score)
+
+0.8392087523483258
+
+
+print('Misclassified samples: %d' % (test_y != prediction).sum())
+Misclassified samples: 1455
+data.shape
+(31978, 13) FEATURE SELECTION TECHNIQUES import pandas as pd import numpy as np from scipy.stats import chi2_contingency import seaborn as sns tips=sns.Ioad_dataset('tips') tips.head()
+
+image contingency_table=pd.crosstab(tips['sex'],tips['time']) print(contingency_table)
+image
+chi2, p, _, _ = chi2_contingency(contingency_table) print(f”Chi-Square Statistic: {chi2}")
+print(f”P-value: {p}”)
+image
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_clas data={
+'Feature1':[1,2,3,4,5], 'Feature2' : ['A','B','C','A','B'], 'Feature3':[0,1,1,0,1],
+'Target' :[0,1,1,0,1]
+
+df=pd.DataFrame(data) X=df[['Feature1','Feature3']] y=df['Target']
+selector=SelectKBest(score_func=mutual_info_classif, k=1) X_neW = selector.fit_transform (X,y)
+selected_feature_indices	selector.get_support(indices=True)
+selected_features	X.columns[selected_feature_indices] print("Selected Features:”)
+print(selected_features)
+image
+
 # RESULT:
-       # INCLUDE YOUR RESULT HERE
+       To read the given data and perform Feature Scaling and Feature Selection process
