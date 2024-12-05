@@ -25,96 +25,194 @@ The feature selection techniques used are:
 
 # CODING AND OUTPUT:
 
-import pandas as pd
-from scipy import stats import numpy as np
-df=pd.read_csv(”/content/bmi.csv”) df.head()
-image
-df . dropna ( )
-image max_vals=np.max(np.abs(df[['Height','Weight']])) max_vals
-image
-from sklearn.preprocessing import StandardScaler sc=StandardScaler()
+from google.colab import drive
+drive.mount('/content/drive')
 
-df[['Height', 'Weight']]=sc.fit_transform(df[['Height','Weight']]) df.head(10)
-image
+ls drive/MyDrive/'Colab Notebooks'/
+
+# **FEATURE SCALING**
+
+import pandas as pd
+import numpy as np
+import scipy as stats
+
+df=pd.read_csv('drive/MyDrive/Data Science/bmi.csv')
+df.head()
+
+![Screenshot 2024-11-28 134830](https://github.com/user-attachments/assets/38b737cc-f0e2-45b5-9c34-cce539f94849)
+
+df.dropna()
+max_vals=np.max(np.abs(df[['Height','Weight']]))
+max_vals
+
+199
+
+from sklearn.preprocessing import StandardScaler
+
+sc=StandardScaler()
+df[['Height','Weight']]=sc.fit_transform(df[['Height','Weight']]) 
+ df
+ 
+![Screenshot 2024-11-28 134847](https://github.com/user-attachments/assets/7f498f9c-af74-46e4-a695-bba30454d3d8)
+
+
 from sklearn.preprocessing import MinMaxScaler
 
 scaler=MinMaxScaler()
-df[['Height', 'Weight']]=scaler.fit transform(df[['Height','Weight']]) df.head(10)
-image
-from sklearn.preprocessing import Normalizer scaler=Normalizer()
-df[['Height', 'Weight']]=scaler.fit_transform(df[['Height', 'Weight']])
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
 df
-image
-df1=pd.read_csv(“/content/bmi.csv")
-from sklearn.preprocessing import MaxAbsScaler scaler=MaxAbsScaler()
-df1[['Height','Weight']]=scaler.fit_transform(df1[['Height', 'Weight']]) df1
-image
-df2=pd.read csv("/content/bmi.csv")
-from sklearn.preprocessing import RobustScaler scaler=RobustScaler()
-df2[['Height','Weight']]=scaler.fit_transform(df2[['Height', 'Weight']]) df2.head()
-image
-import pandas as pd import numpy as np import seaborn as sns
-from sklearn.model_selection import train_test_split from sklearn.neighbors import KNeighborsClassifier
+
+![Screenshot 2024-11-28 134856](https://github.com/user-attachments/assets/1aaf4a7e-6d28-4588-8ce2-ced8ba28f23d)
+
+from sklearn.preprocessing import Normalizer
+scaler=Normalizer()
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
+df
+
+![Screenshot 2024-11-28 134904](https://github.com/user-attachments/assets/1ed2c679-e73d-450a-832f-ffb5dccda288)
+
+from sklearn.preprocessing import MaxAbsScaler
+scaler=MaxAbsScaler()
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
+df
+
+![Screenshot 2024-11-28 134911](https://github.com/user-attachments/assets/b52caacb-f2f1-4738-81a7-3ef5dd3996ac)
+
+from sklearn.preprocessing import RobustScaler
+scaler=RobustScaler()
+df[['Height','Weight']]=scaler.fit_transform(df[['Height','Weight']])
+df
+
+![Screenshot 2024-11-28 134917](https://github.com/user-attachments/assets/06517dcf-898b-4447-b21a-a28187c92f88)
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score,confusion_matrix
-data=pd.read_csv('/content/income(1) (1).csv',na_values=[“ ?“]) data
-image
+data=pd.read_csv('drive/MyDrive/Data Science/income.csv',na_values=[" ?"])
+data
+
+![Screenshot 2024-11-28 134932](https://github.com/user-attachments/assets/7b71e752-4f40-464d-802a-305143df3522)
+
+
 data.isnull().sum()
 
+![Screenshot 2024-11-28 134945](https://github.com/user-attachments/assets/5bf87e09-8cea-4b3a-af63-b543ff04373a)
 
-image missing=data[data.isnull().any(axis=1)] missing
-image
-data2	data.dropna(axis=0) data2
-image
+missing=data[data.isnull().any(axis=1)]
+missing
+
+![Screenshot 2024-11-28 134953](https://github.com/user-attachments/assets/bfc4143f-7426-4e33-a40a-0438b41993cc)
+
+data2 = data.dropna(axis=0)
+data2
+
+![Screenshot 2024-11-28 135001](https://github.com/user-attachments/assets/55230dbc-c0d7-42d6-afe5-1562677f8233)
+
 sal=data['SalStat']
-data2['SalStat']=data2['SalStat'].map({' less than or equal to 50,000':0,' gre
+data2['SalStat']=data2['SalStat'].map({' less than or equal to 50,000':0,' greater than 50,000':1})
+print(data2['SalStat
 
-print(data2['SalStat'])
+![Screenshot 2024-11-28 135009](https://github.com/user-attachments/assets/e1991ca0-a818-41ad-9adb-0a7012991a27)
 
-image
-sal2=data2['SalStat'] dfs=pd.concat([sal,sal2],axis=1) dfs
-image data2 image
+sal2=data2['SalStat']
+dfs=pd.concat([sal,sal2],axis=1)
+dfs
+
+![Screenshot 2024-11-28 135016](https://github.com/user-attachments/assets/1f17d7cb-0b2e-4041-9906-ea48b14a9fab)
+
+data2
+
+![Screenshot 2024-11-28 135023](https://github.com/user-attachments/assets/c8a3544d-5dfe-48a1-9749-7b1d3a0ac48b)
+
 new_data=pd.get_dummies(data2, drop_first=True)
 new_data
-image columns_list=list(new_data.columns) print(columns_list)
-image
-features=list(set(columns_list)-set(['SalStat'])) print(features)
-image
-y=new_data['SalStat'].values print(y)
-[0 0 1 ... 0 0 0]
 
-x = new_data[features].values print(x)
-image
-train_x,test_x,train_y,test_y	train_test_split(x,y,test_size=0.3, random_sta g KNN_classifier=KNeighborsClassifier(n_neighbors	5) KNN_classifier.fit(train_x,train_y)
+![Screenshot 2024-11-28 135034](https://github.com/user-attachments/assets/efb8a360-a409-4dee-a963-63e714c0d5ef)
 
-imape
-prediction = KNN_classifier.predict(test_x) confusionMmatrix = confusion_matrix(test_y, prediction) print(confusionMmatrix)
-image
-accuracy_score=accuracy_score(test_y, prediction) print(accuracy_score)
+columns_list=list(new_data.columns)
 
-0.8392087523483258
+features=list(set(columns_list)-set(['SalStat']))
+print(features)
 
+y=new_data['SalStat'].values
+print(y)
+
+![Screenshot 2024-11-28 135141](https://github.com/user-attachments/assets/1158ce13-6267-420d-ba29-ea4f4df7df24)
+
+x = new_data[features].values
+print(x)
+
+![Screenshot 2024-11-28 135144](https://github.com/user-attachments/assets/d274100b-3090-4674-8441-2e9fe0d63a92)
+
+train_x,test_x,train_y,test_y = train_test_split(x,y,test_size=0.3, random_state=0)
+KNN_classifier=KNeighborsClassifier(n_neighbors = 5)
+KNN_classifier.fit(train_x,train_y)
+
+prediction = KNN_classifier.predict(test_x)
+confusionMmatrix = confusion_matrix(test_y, prediction)
+print(confusionMmatrix)
+
+![Screenshot 2024-11-28 135551](https://github.com/user-attachments/assets/d078bb3c-8a2e-4652-a9bc-f1e2d4e08d2e)
+
+accuracy_score=accuracy_score(test_y, prediction)
+print(accuracy_score)
+
+![Screenshot 2024-11-28 135557](https://github.com/user-attachments/assets/acec7d7a-0198-4366-8271-c9f90614882e)
 
 print('Misclassified samples: %d' % (test_y != prediction).sum())
-Misclassified samples: 1455
+
+![Screenshot 2024-11-28 135602](https://github.com/user-attachments/assets/3ea67e20-ea92-420e-815c-8739c6ca019f)
+
 data.shape
-(31978, 13) FEATURE SELECTION TECHNIQUES import pandas as pd import numpy as np from scipy.stats import chi2_contingency import seaborn as sns tips=sns.Ioad_dataset('tips') tips.head()
 
-image contingency_table=pd.crosstab(tips['sex'],tips['time']) print(contingency_table)
-image
-chi2, p, _, _ = chi2_contingency(contingency_table) print(f”Chi-Square Statistic: {chi2}")
-print(f”P-value: {p}”)
-image
+![Screenshot 2024-11-28 135606](https://github.com/user-attachments/assets/efaa55aa-33a5-4312-9685-423b58c3da1c)
+
+# **FEATURE SELECTION TECHNIQUES**
+
 import pandas as pd
-from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_clas data={
-'Feature1':[1,2,3,4,5], 'Feature2' : ['A','B','C','A','B'], 'Feature3':[0,1,1,0,1],
-'Target' :[0,1,1,0,1]
+import numpy as np
+from scipy.stats import chi2_contingency
+import seaborn as sns
+tips=sns.load_dataset('tips')
+tips.head()
 
-df=pd.DataFrame(data) X=df[['Feature1','Feature3']] y=df['Target']
-selector=SelectKBest(score_func=mutual_info_classif, k=1) X_neW = selector.fit_transform (X,y)
-selected_feature_indices	selector.get_support(indices=True)
-selected_features	X.columns[selected_feature_indices] print("Selected Features:”)
+![Screenshot 2024-11-28 135611](https://github.com/user-attachments/assets/de5ed262-c7f9-4ab9-b0f9-d84128e651c7)
+
+contingency_table=pd.crosstab(tips['sex'],tips['time'])
+print(contingency_table)
+
+![Screenshot 2024-11-28 135614](https://github.com/user-attachments/assets/3f362d76-3d57-48a9-920d-c0dafe31ead8)
+
+chi2, p, _, _ = chi2_contingency(contingency_table)
+print(f"Chi-Square Statistic: {chi2}")
+print(f"P-value: {p}")
+
+![Screenshot 2024-11-28 135618](https://github.com/user-attachments/assets/4bcb7b45-8ba1-4a79-9698-cabdb12738e4)
+
+import pandas as pd
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, f_classif
+data={
+    'Feature1':[1,2,3,4,5],
+    'Feature2': ['A','B','C','A','B'],
+    'Feature3':[0,1,1,0,1],
+    'Target' :[0,1,1,0,1]
+}
+
+df=pd.DataFrame(data)
+X=df[['Feature1','Feature3']]
+y=df['Target']
+
+selector=SelectKBest(score_func=mutual_info_classif, k=1)
+X_new = selector.fit_transform (X,y)
+selected_feature_indices = selector.get_support(indices=True)
+selected_features = X.columns[selected_feature_indices]
+print("Selected Features:")
 print(selected_features)
-image
+
+![Screenshot 2024-11-28 135623](https://github.com/user-attachments/assets/6ae1c1fa-eb96-4860-a82c-bd0ed9e5e2ba)
 
 # RESULT:
-       To read the given data and perform Feature Scaling and Feature Selection process
+       Thus, the data was successfully processed and validated using Feature Scaling and Selection techniques.
